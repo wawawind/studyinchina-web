@@ -119,11 +119,11 @@ h2 {
 
 /* พื้นที่วางแผนที่ */
 .map-container {
-  position: relative; /* สำคัญ! เป็นจุดอ้างอิงให้หมุด */
+  position: relative;
   width: 100%;
-  /* ปรับความสูงตามอัตราส่วนรูป (Aspect Ratio) */
+  min-height: 500px;
   aspect-ratio: 4/3;
-  background-image: url("../assets/china-map.png"); /* ดึงรูปจากโฟลเดอร์ assets */
+  background-image: url("../assets/Image/china_map.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
