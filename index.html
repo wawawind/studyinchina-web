@@ -4,19 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study in China - แนะนำการศึกษาต่อประเทศจีน</title>
-
     <meta
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';"
     />
-
-    <meta
-      name="description"
-      content="เว็บไซต์แนะนำข้อมูลการศึกษาต่อประเทศจีน มหาวิทยาลัย หลักสูตร และเมืองน่าอยู่"
-    />
-
     <link rel="stylesheet" href="css/style.css" />
-
+    <link rel="stylesheet" href="css/mobile.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap"
       rel="stylesheet"
@@ -45,27 +38,20 @@
       <p class="subtitle">เลือกเมืองที่คุณสนใจบนแผนที่</p>
 
       <div class="map-wrapper">
-    <div class="map-container" id="china-map">
-        
-        <div class="pin" style="top: 30%; left: 70%" data-city="beijing"></div>
-        <div class="pin" style="top: 55%; left: 78%" data-city="shanghai"></div>
-        <div class="pin" style="top: 60%; left: 50%" data-city="chengdu"></div>
-    
-    </div>
+        <div class="map-container" id="china-map">
+          <div class="map-content"></div>
+        </div>
 
-    <div class="info-panel" id="info-panel" hidden>
-        <button class="close-btn" onclick="closeInfo()">×</button>
-        <h3 id="uni-name">ชื่อเมือง/มหาลัย</h3>
-        <div id="uni-details">รายละเอียดจะปรากฏที่นี่...</div>
-        <button class="btn-more">ดูหลักสูตรทั้งหมด</button>
-    </div>
-</div>
+        <div class="info-panel" id="info-panel">
+          <button class="close-btn" onclick="closeInfo()">×</button>
+          <h3 id="uni-name">ชื่อเมือง</h3>
+          <div id="uni-details">รายละเอียด...</div>
+          <button class="btn-more">ดูหลักสูตรทั้งหมด</button>
+        </div>
       </div>
     </section>
-
     <section id="contact" class="container contact-bg">
       <h2>ส่งเอกสาร / ปรึกษาเรียนต่อ</h2>
-
       <form id="contactForm" class="secure-form">
         <div class="form-group">
           <label for="name">ชื่อ-นามสกุล:</label>
@@ -77,7 +63,6 @@
             placeholder="ระบุชื่อจริง"
           />
         </div>
-
         <div class="form-group">
           <label for="email">อีเมลติดต่อกลับ:</label>
           <input
@@ -88,12 +73,10 @@
             placeholder="example@email.com"
           />
         </div>
-
         <div class="form-group">
           <label for="message">ข้อความเพิ่มเติม:</label>
           <textarea id="message" name="message" rows="4"></textarea>
         </div>
-
         <button type="submit" class="btn-submit">ส่งข้อมูล (ปลอดภัย 🔒)</button>
       </form>
     </section>
@@ -101,7 +84,7 @@
     <footer>
       <p>&copy; 2024 ChinaStudy.TH - All Rights Reserved.</p>
     </footer>
-
+    <script src="js/data.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

@@ -1,28 +1,27 @@
-/* 1. Reset & Global Styles (ล้างค่าเดิมให้สะอาด) */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
-
 body {
   font-family: "Sarabun", sans-serif;
-  line-height: 1.6;
-  color: #333;
   background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
+html {
+  scroll-behavior: smooth;
 }
 ul {
   list-style: none;
 }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-/* 2. Navbar (แถบเมนูบนสุด) */
 .navbar {
-  background-color: #d32f2f; /* สีแดงจีน */
+  background-color: #d32f2f;
   color: white;
   padding: 1rem 2rem;
   display: flex;
@@ -30,25 +29,19 @@ ul {
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
 }
-
 .nav-links {
   display: flex;
   gap: 20px;
 }
-.nav-links a:hover {
-  text-decoration: underline;
-}
 
-/* 3. Hero Section (ส่วนหัว) */
 .hero {
   background:
-    linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1920&q=80"); /* รูปพื้นหลัง Great Wall */
+    linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1920&q=80");
   background-size: cover;
   background-position: center;
   height: 60vh;
@@ -58,26 +51,14 @@ ul {
   text-align: center;
   color: white;
 }
-
 .hero h1 {
   font-size: 3.5rem;
-  margin-bottom: 25px;
-  line-height: 1.2;
-  letter-spacing: 1px;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
 }
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 35px;
-  line-height: 1.5;
-  color: #f0f0f0;
-}
-
 .btn-cta {
-  background-color: #ffc107; /* สีเหลืองทอง */
+  background-color: #ffc107;
   color: #333;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border-radius: 5px;
   font-weight: bold;
   transition: 0.3s;
@@ -87,108 +68,120 @@ ul {
   transform: scale(1.05);
 }
 
-/* 4. Map Section (ส่วนแผนที่) - ไฮไลท์! */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 50px 20px;
 }
-
 h2 {
   text-align: center;
-  margin-bottom: 10px;
   color: #d32f2f;
+  margin-bottom: 10px;
 }
 .subtitle {
   text-align: center;
   color: #666;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .map-wrapper {
   position: relative;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 12px;
   overflow: hidden;
-  background-color: #fff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: stretch;
 }
 
-/* พื้นที่วางแผนที่ */
 .map-container {
-  position: relative;
   width: 100%;
   min-height: 500px;
-  aspect-ratio: 4/3;
   background-image: url("../assets/Image/china_map.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  flex-shrink: 0;
+  position: relative;
 }
 
-/* หมุด (Pin) ที่เราจะสร้างด้วย JS */
 .pin {
   position: absolute;
-  width: 20px; /* ขนาดจุด */
+  width: 20px;
   height: 20px;
-  background-color: #d32f2f; /* สีแดง */
-  border: 3px solid white; /* ขอบขาว */
-  border-radius: 50%; /* ทำเป็นวงกลม */
+  background: #d32f2f;
+  border: 3px solid white;
+  border-radius: 50%;
   cursor: pointer;
-  transform: translate(-50%, -50%); /* จัดกึ่งกลางจุด */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* เงา */
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+  z-index: 10;
 }
-
 .pin:hover {
   transform: translate(-50%, -50%) scale(1.5);
-  background-color: #ffc107;
+  background: #ffc107;
   z-index: 20;
 }
 
-/* Tooltip ชื่อเมือง (เด้งขึ้นมาตอนชี้) */
-.pin::after {
-  content: attr(data-name);
-  position: absolute;
-  bottom: 25px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.8);
-  color: white;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  white-space: nowrap;
+.info-panel {
+  width: 0;
   opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s;
-}
-.pin:hover::after {
-  opacity: 1;
+  padding: 0;
+  overflow: hidden;
+  background: white;
+  border-left: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* 5. Contact Form */
-.contact-bg {
-  background-color: #f9f9f9;
+.map-wrapper.active .map-container {
+  width: 65%;
 }
+.map-wrapper.active .info-panel {
+  width: 35%;
+  opacity: 1;
+  padding: 30px;
+}
+
+.close-btn {
+  align-self: flex-end;
+  font-size: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #999;
+}
+.close-btn:hover {
+  color: #d32f2f;
+}
+.btn-more {
+  margin-top: 20px;
+  padding: 10px;
+  background: #333;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
 .secure-form {
   max-width: 500px;
   margin: 0 auto;
   background: white;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
-
 .form-group {
   margin-bottom: 15px;
-}
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
 }
 .form-group input,
 .form-group textarea {
@@ -196,31 +189,22 @@ h2 {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  margin-top: 5px;
 }
-
 .btn-submit {
   width: 100%;
   padding: 12px;
-  background-color: #d32f2f;
+  background: #d32f2f;
   color: white;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
   cursor: pointer;
 }
-.btn-submit:hover {
-  background-color: #b71c1c;
-}
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-  }
-  .nav-links {
-    margin-top: 15px;
-  }
-  .hero h1 {
-    font-size: 2rem;
-  }
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 20px;
 }

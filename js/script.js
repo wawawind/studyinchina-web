@@ -1,68 +1,66 @@
-// 1. ฐานข้อมูลมหาลัย (เพิ่มเมืองได้เรื่อยๆ ตรงนี้)
-const universityData = {
-  beijing: {
-    city: "ปักกิ่ง (Beijing)",
-    details: "เมืองหลวงของจีน ศูนย์รวมการศึกษาชั้นนำ",
-    universities: [
-      "Peking University (อันดับ 1)",
-      "Tsinghua University (เด่นวิศวะ)",
-      "Beijing Normal University (เด่นครู/ภาษา)",
-    ],
-  },
-  shanghai: {
-    city: "เซี่ยงไฮ้ (Shanghai)",
-    details: "มหานครทันสมัย ศูนย์กลางเศรษฐกิจโลก",
-    universities: [
-      "Fudan University",
-      "Shanghai Jiao Tong University",
-      "Tongji University",
-    ],
-  },
-  chengdu: {
-    city: "เฉิงตู (Chengdu)",
-    details: "เมืองแห่งแพนด้า อาหารอร่อย ค่าครองชีพไม่แพง",
-    universities: ["Sichuan University", "Southwestern University of Finance"],
-  },
-  // อยากเพิ่มเมืองอื่น ก๊อปปี้บล็อกข้างบนมาวางต่อได้เลย
-};
-
-// 2. ฟังก์ชันทำงานเมื่อกดปุ่ม
 function showInfo(cityKey) {
-  // ดึงข้อมูลจากฐานข้อมูลด้านบน
   const data = universityData[cityKey];
-
-  // ถ้าไม่มีข้อมูลให้หยุดทำงาน
   if (!data) return;
 
-  // เปลี่ยนข้อความในหน้าเว็บ
   document.getElementById("uni-name").innerText = data.city;
   document.getElementById("uni-details").innerHTML = `
         <p>${data.details}</p>
+        <hr style="margin: 15px 0; border: 0; border-top: 1px solid #eee;">
         <strong>มหาวิทยาลัยแนะนำ:</strong>
-        <ul>
-            ${data.universities.map((uni) => `<li>${uni}</li>`).join("")}
+        <ul style="margin-top: 10px; padding-left: 20px;">
+            ${data.universities.map((uni) => `<li style="margin-bottom: 5px;">${uni}</li>`).join("")}
         </ul>
     `;
 
-  // เปิดกล่องข้อมูลขึ้นมา (ลบ attribute hidden ออก)
-  document.getElementById("info-panel").removeAttribute("hidden");
+  document.querySelector(".map-wrapper").classList.add("active");
+
+  if (window.innerWidth <= 768) {
+    setTimeout(() => {
+      document.getElementById("info-panel").scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }, 300);
+  }
 }
 
-// 3. ฟังก์ชันปิดกล่องข้อมูล
 function closeInfo() {
-  document.getElementById("info-panel").setAttribute("hidden", true);
+  document.querySelector(".map-wrapper").classList.remove("active");
 }
 
-// 4. เชื่อมต่อปุ่มกด (Event Listeners)
-document.addEventListener("DOMContentLoaded", () => {
-  // หาปุ่มหมุดทั้งหมดที่มี class="pin"
-  const pins = document.querySelectorAll(".pin");
+function initMap() {
+  const mapContainer =
+    document.querySelector(".map-content") ||
+    document.querySelector(".map-container");
 
-  pins.forEach((pin) => {
+  for (const [key, data] of Object.entries(universityData)) {
+    const pin = document.createElement("div");
+    pin.className = "pin";
+    pin.style.top = data.top;
+    pin.style.left = data.left;
+    pin.setAttribute("data-city", key);
+
     pin.addEventListener("click", function () {
-      // ดึงชื่อเมืองจาก attribute "data-city" ใน HTML
-      const city = this.getAttribute("data-city");
-      showInfo(city);
+      showInfo(key);
     });
-  });
+
+    mapContainer.appendChild(pin);
+  }
+
+  if (window.innerWidth <= 768) {
+    const container = document.querySelector(".map-container");
+    const content = document.querySelector(".map-content");
+
+    if (container && content) {
+      const centerX = (content.offsetWidth - container.offsetWidth) / 2;
+      const centerY = (content.offsetHeight - container.offsetHeight) / 2;
+
+      container.scrollLeft = centerX;
+      container.scrollTop = centerY;
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initMap();
 });

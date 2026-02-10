@@ -1,0 +1,83 @@
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+  }
+  .nav-links {
+    margin-top: 15px;
+  }
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .map-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .map-container {
+    width: 100% !important;
+    min-height: unset !important;
+    height: 45vh !important;
+    overflow: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    background: none;
+  }
+
+  .map-container::after {
+    display: none;
+  }
+
+  .map-content {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background-image: url("../assets/Image/china_map.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .map-content .pin {
+    z-index: 10;
+  }
+
+  .info-panel {
+    width: 100% !important;
+    height: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+    background: white;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .map-wrapper.active .info-panel {
+    height: auto;
+    max-height: 1000px;
+    padding: 20px;
+    opacity: 1;
+    margin-bottom: 20px;
+  }
+
+  .close-btn {
+    top: 10px;
+    right: 10px;
+    background: #f5f5f5;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
