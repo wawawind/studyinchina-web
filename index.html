@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study in China - แนะนำการศึกษาต่อประเทศจีน</title>
+
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';"
+    />
+
+    <meta
+      name="description"
+      content="เว็บไซต์แนะนำข้อมูลการศึกษาต่อประเทศจีน มหาวิทยาลัย หลักสูตร และเมืองน่าอยู่"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">ChinaStudy<span style="color: #d32f2f">.TH</span></div>
+      <ul class="nav-links">
+        <li><a href="#home">หน้าแรก</a></li>
+        <li><a href="#map-section">แผนที่มหาลัย</a></li>
+        <li><a href="#contact">ส่งเอกสาร</a></li>
+      </ul>
+    </nav>
+
+    <header id="home" class="hero">
+      <div class="hero-content">
+        <h1>เปิดประตูสู่การศึกษาจีน</h1>
+        <p>ค้นหามหาวิทยาลัยที่ใช่ ในเมืองที่คุณชอบ</p>
+        <a href="#map-section" class="btn-cta">ดูแผนที่มหาวิทยาลัย</a>
+      </div>
+    </header>
+
+    <section id="map-section" class="container">
+      <h2>📍 แผนที่การศึกษา</h2>
+      <p class="subtitle">เลือกเมืองที่คุณสนใจบนแผนที่</p>
+
+      <div class="map-wrapper">
+        <div
+          class="map-container"
+          id="china-map"
+          style="
+            background-image: url(&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/China_blank_map_with_provinces.svg/1024px-China_blank_map_with_provinces.svg.png&quot;);
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 500px;
+            position: relative;
+          "
+        >
+          <div class="pin" style="top: 30%; left: 70%" title="Beijing"></div>
+          <div class="pin" style="top: 55%; left: 78%" title="Shanghai"></div>
+          <div class="pin" style="top: 60%; left: 50%" title="Chengdu"></div>
+        </div>
+
+        <div class="info-panel" id="info-panel" hidden>
+          <button class="close-btn" onclick="closeInfo()">×</button>
+          <h3 id="uni-name">ชื่อเมือง/มหาลัย</h3>
+          <div id="uni-details">รายละเอียดจะปรากฏที่นี่...</div>
+          <button class="btn-more">ดูหลักสูตรทั้งหมด</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="container contact-bg">
+      <h2>ส่งเอกสาร / ปรึกษาเรียนต่อ</h2>
+
+      <form id="contactForm" class="secure-form">
+        <div class="form-group">
+          <label for="name">ชื่อ-นามสกุล:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            placeholder="ระบุชื่อจริง"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email">อีเมลติดต่อกลับ:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="example@email.com"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message">ข้อความเพิ่มเติม:</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">ส่งข้อมูล (ปลอดภัย 🔒)</button>
+      </form>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 ChinaStudy.TH - All Rights Reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

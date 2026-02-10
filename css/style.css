@@ -1,0 +1,167 @@
+/* 1. Reset & Global Styles (ล้างค่าเดิมให้สะอาด) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sarabun', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* 2. Navbar (แถบเมนูบนสุด) */
+.navbar {
+    background-color: #d32f2f; /* สีแดงจีน */
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo { font-size: 1.5rem; font-weight: bold; }
+
+.nav-links { display: flex; gap: 20px; }
+.nav-links a:hover { text-decoration: underline; }
+
+/* 3. Hero Section (ส่วนหัว) */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=1920&q=80'); /* รูปพื้นหลัง Great Wall */
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+.btn-cta {
+    background-color: #ffc107; /* สีเหลืองทอง */
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+.btn-cta:hover { background-color: #ffdb4d; transform: scale(1.05); }
+
+/* 4. Map Section (ส่วนแผนที่) - ไฮไลท์! */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+h2 { text-align: center; margin-bottom: 10px; color: #d32f2f; }
+.subtitle { text-align: center; color: #666; margin-bottom: 30px; }
+
+.map-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* พื้นที่วางแผนที่ */
+.map-container {
+    position: relative; /* สำคัญ! เป็นจุดอ้างอิงให้หมุด */
+    width: 100%;
+    /* ปรับความสูงตามอัตราส่วนรูป (Aspect Ratio) */
+    aspect-ratio: 4/3; 
+    background-image: url('../assets/china-map.png'); /* ดึงรูปจากโฟลเดอร์ assets */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* หมุด (Pin) ที่เราจะสร้างด้วย JS */
+.pin {
+    position: absolute;
+    width: 20px;       /* ขนาดจุด */
+    height: 20px;
+    background-color: #d32f2f; /* สีแดง */
+    border: 3px solid white;   /* ขอบขาว */
+    border-radius: 50%;        /* ทำเป็นวงกลม */
+    cursor: pointer;
+    transform: translate(-50%, -50%); /* จัดกึ่งกลางจุด */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* เงา */
+}
+
+.pin:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    background-color: #ffc107;
+    z-index: 20;
+}
+
+/* Tooltip ชื่อเมือง (เด้งขึ้นมาตอนชี้) */
+.pin::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+.pin:hover::after { opacity: 1; }
+
+/* 5. Contact Form */
+.contact-bg { background-color: #f9f9f9; }
+.secure-form {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+.btn-submit:hover { background-color: #b71c1c; }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; }
+    .nav-links { margin-top: 15px; }
+    .hero h1 { font-size: 2rem; }
+}
