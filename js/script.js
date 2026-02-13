@@ -25,7 +25,11 @@ function showInfo(cityKey) {
 }
 
 function closeInfo() {
-  document.querySelector(".map-wrapper").classList.remove("active");
+  const wrapper = document.querySelector(".map-wrapper");
+  wrapper.classList.remove("active");
+  document.querySelectorAll(".pin").forEach((pin) => {
+    pin.classList.remove("active");
+  });
 }
 
 function initMap() {
@@ -41,7 +45,30 @@ function initMap() {
     pin.setAttribute("data-city", key);
 
     pin.addEventListener("click", function () {
+      document
+        .querySelectorAll(".pin")
+        .forEach((p) => p.classList.remove("active"));
+      this.classList.add("active");
       showInfo(key);
+      if (window.innerWidth <= 768) {
+        const scrollableContainer = document.querySelector(".map-container");
+        if (scrollableContainer) {
+          const centerX =
+            this.offsetLeft -
+            scrollableContainer.offsetWidth / 2 +
+            this.offsetWidth / 2;
+          const centerY =
+            this.offsetTop -
+            scrollableContainer.offsetHeight / 2 +
+            this.offsetHeight / 2;
+
+          scrollableContainer.scrollTo({
+            left: centerX,
+            top: centerY,
+            behavior: "smooth",
+          });
+        }
+      }
     });
 
     mapContainer.appendChild(pin);
