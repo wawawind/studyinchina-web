@@ -45,6 +45,10 @@ function initMap() {
     pin.setAttribute("data-city", key);
 
     pin.addEventListener("click", function () {
+      if (this.classList.contains("active")) {
+        closeInfo();
+        return;
+      }
       document
         .querySelectorAll(".pin")
         .forEach((p) => p.classList.remove("active"));
